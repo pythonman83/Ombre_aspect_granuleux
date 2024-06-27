@@ -1,0 +1,84 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightsalmon;
+  height: 100vh;
+}
+
+p {
+  padding-top: 150px;
+  padding-right: 20px;
+  z-index: 30;
+  transform: skewX(-14deg) rotateX(37deg);
+  color: rgba(255,255,255,0.5);
+  font-weight: 700;
+  font-size: 4em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+section {
+  position: relative;
+  width: 250px;
+}
+
+.ball {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  width: 250px;
+  border-radius: 125px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+
+.isolate {
+  isolation: isolate;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Magie : utiliser le bruit SVG comme arrière-plan, puis augmenter le contraste et la luminosité
+
+/* Remarque : importez le noise.svg depuis un site externe, mais en pratique, vous pointez simplement vers le fichier svg comme chemin relatif. (Référencer son identifiant ne fonctionne pas non plus) */
+
+.ball-shadow {
+  height: 100%;
+  background: radial-gradient(circle at 65% 35%, rgba(0, 0, 0, 0), mediumblue), url(https://grainy-gradients.vercel.app/noise.svg);     
+  filter: contrast(120%) brightness(900%);
+}
+
+/* Le dégradé doux pour donner de l'éclat à la balle. Le mélange avec le bruit l’accentue encore davantage. */
+
+.ball-light {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 67% 30%, lightsalmon, crimson);
+  mix-blend-mode: multiply;
+}
+
+/* Pour continuer la démo du bruit, l'ombre au sol. Pas d'isolation ici, donc le mélange inclut l'arrière-plan */
+.ground {
+  position: absolute;
+  width: 150%;
+  height: 140px;
+  bottom: -10px;
+  left: -65%;
+  transform: rotateZ(7deg);
+  mix-blend-mode: multiply;
+}
+
+.ground-shadow {
+  width: 95%;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 70%, navy, rgba(0, 0, 0, 0)), url(https://grainy-gradients.vercel.app/noise.svg);
+  filter: contrast(150%) brightness(700%);
+}
